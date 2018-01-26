@@ -187,7 +187,7 @@ class Post_Notif_Admin {
 		
 		global $post;
 		
-		if ( 'post' != $post->post_type ) {
+		if ( 'post' != $post->post_type AND 'page' != $post->post_type) {
 			
 			return;
 		}
@@ -234,7 +234,7 @@ class Post_Notif_Admin {
 		if ( ( wp_is_post_autosave( $post_id ) ) ||
 			( ! current_user_can( 'edit_page', $post_id ) ) ||
 			( empty( $post_id ) ) || 
-			( 'post' != get_post_type( $post_id ) ) 
+			( 'post' != get_post_type( $post_id ) AND 'page' != get_post_type($post_id)) 
 		) {
 		
 			// This is an autosave or an unauthorized user or not a post
@@ -333,7 +333,7 @@ class Post_Notif_Admin {
 			'post_notif'
 			,'Post Notif'
 			,array( $this, 'render_post_notif_meta_box' )
-			,'post'
+			,array('post','page')
 		);
 		
 	}
